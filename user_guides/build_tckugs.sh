@@ -44,6 +44,7 @@ if [ -z "$1" ]; then
    cp -r $USERGUIDEDIR/$j/target/staging $USERGUIDEDIR/tmp/userguides/$j
  done
  bundlename="userguides_alltcks.zip"
+
 else
  for i in "$@"
  do
@@ -52,6 +53,7 @@ else
    cp -r $USERGUIDEDIR/$i/target/staging $USERGUIDEDIR/tmp/userguides/$i
  done
  bundlename="userguides.zip"
+
 fi
 
 cd $USERGUIDEDIR/tmp
