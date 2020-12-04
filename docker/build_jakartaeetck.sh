@@ -100,15 +100,15 @@ if [ -z "$GF_BUNDLE_URL" ]; then
   echo "Using default url for GF bundle: $DEFAULT_GF_BUNDLE_URL"
   export GF_BUNDLE_URL=$DEFAULT_GF_BUNDLE_URL
 fi
-wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
-unzip -q -o latest-glassfish.zip
-ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
+#wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
+#unzip -q -o latest-glassfish.zip
+#ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
 
 
-if [ ! -z "$GF_VERSION_URL" ]; then
-  wget --progress=bar:force --no-cache $GF_VERSION_URL -O glassfish.version
-  cat glassfish.version
-fi
+#if [ ! -z "$GF_VERSION_URL" ]; then
+#  wget --progress=bar:force --no-cache $GF_VERSION_URL -O glassfish.version
+#  cat glassfish.version
+#fi
 
 echo "########## Trunk.Clean.Build.Libs ##########"
 ant -f $BASEDIR/install/jakartaee/bin/build.xml -Ddeliverabledir=jakartaee -Dbasedir=$BASEDIR/install/jakartaee/bin clean.all build.all.jars
