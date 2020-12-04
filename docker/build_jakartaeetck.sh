@@ -165,6 +165,9 @@ rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/simple-glassfish-api*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stats77*.jar 
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stax2-api*.jar
 
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security.jar
+
+
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.el.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.enterprise.concurrent.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.security.enterprise.jar
