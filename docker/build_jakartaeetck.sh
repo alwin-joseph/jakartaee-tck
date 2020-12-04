@@ -143,17 +143,17 @@ rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jstl-connector*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jta*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jts*.jar
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/k*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/l*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/m*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/n*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/o*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/p*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/r*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/s*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/t*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/w*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/y*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/k*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/l*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/m*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/n*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/o*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/p*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/r*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/s*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/t*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/w*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/y*.jar
 
 #mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 ls $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
