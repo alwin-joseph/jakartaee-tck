@@ -157,10 +157,12 @@ rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/y*.jar
 
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/scattered-archive-api.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/schema2beans*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security*.jar
-#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/shoal*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security*.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/shoal*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/ssl-impl*.jar 
-
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/soap-tcp*.jar 
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/simple-glassfish-api*.jar 
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stats77*.jar 
 
 #mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 ls $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
