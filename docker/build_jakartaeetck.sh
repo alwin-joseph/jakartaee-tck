@@ -152,19 +152,24 @@ rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/p*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/r*.jar
 #rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/s*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/t*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/w*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/w*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/y*.jar
+
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/scattered-archive-api.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/schema2beans*.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security*.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/shoal*.jar
+
 
 #mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 ls $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/3.0.0/jakarta.xml.bind-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.xml.bind-api.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-osgi/3.0.0/jaxb-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jaxb-osgi.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api/3.0.0/webservices-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-tools/3.0.0/webservices-tools-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-tools.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api-osgi/3.0.0/webservices-api-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api-osgi.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-osgi/3.0.0/webservices-osgi-3.0.0.jar GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-osgi.jar
-
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/3.0.0/jakarta.xml.bind-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.xml.bind-api.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-osgi/3.0.0/jaxb-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jaxb-osgi.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api/3.0.0/webservices-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-osgi/3.0.0/webservices-osgi-3.0.0.jar GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-osgi.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api-osgi/3.0.0/webservices-api-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api-osgi.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-tools/3.0.0/webservices-tools-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-tools.jar
 
 
 ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
