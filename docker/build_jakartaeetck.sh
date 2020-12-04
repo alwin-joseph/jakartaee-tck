@@ -100,14 +100,16 @@ if [ -z "$GF_BUNDLE_URL" ]; then
   echo "Using default url for GF bundle: $DEFAULT_GF_BUNDLE_URL"
   export GF_BUNDLE_URL=$DEFAULT_GF_BUNDLE_URL
 fi
-wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
-unzip -q -o latest-glassfish.zip
-ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
+#wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
+#unzip -q -o latest-glassfish.zip
+#ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
 
 #rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/*
-#mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
-#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
-#ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
+mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
+wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
+wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/3.0.0/jakarta.xml.bind-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.xml.bind-api.jar
+wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-osgi/3.0.0/jaxb-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jaxb-osgi.jar
+ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 
 #if [ ! -z "$GF_VERSION_URL" ]; then
 #  wget --progress=bar:force --no-cache $GF_VERSION_URL -O glassfish.version
