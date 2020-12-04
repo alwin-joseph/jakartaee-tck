@@ -102,11 +102,12 @@ if [ -z "$GF_BUNDLE_URL" ]; then
 fi
 wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
 unzip -q -o latest-glassfish.zip
-#ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
+ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/*
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
-ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/*
+#mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
+#ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 
 #if [ ! -z "$GF_VERSION_URL" ]; then
 #  wget --progress=bar:force --no-cache $GF_VERSION_URL -O glassfish.version
