@@ -165,6 +165,14 @@ rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/simple-glassfish-api*.jar
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stats77*.jar 
 rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stax2-api*.jar
 
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.el.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.enterprise.concurrent.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.security.enterprise.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.servlet.jsp.jar
+rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.servlet.jsp.jstl.jar
+
+
+
 #mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 ls $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
