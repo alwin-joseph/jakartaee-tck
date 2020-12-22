@@ -775,6 +775,7 @@
                             ${lib.pkg.dir}/implementation/sun/javaee/SunRIDeployment1*.java,
                             ${lib.pkg.dir}/implementation/sun/javaee/SunRIPorting*.java,
                             ${lib.pkg.dir}/implementation/sun/javaee/SunRIDeploymentSeparateVM*.java,
+							${lib.pkg.dir}/implementation/sun/javaee/SunRILoginContext,
                             ${lib.pkg.dir}/porting/TSJMS*.java">
 			<classpath>
 				<pathelement path="${ts.lib.classpath}" />
