@@ -761,6 +761,7 @@
 	</target>
 
 	<target name="tslib.compile" depends="tslib.clean, bind.dtds">
+		<echo message="ts.lib.classpath is :${ts.lib.classpath}"/>
 		<ts.javac includes="${lib.pkg.dir}/deliverable/cts/**,
                             ${lib.pkg.dir}/porting/**/*.java,
                             ${lib.pkg.dir}/implementation/sun/javaee/**,
