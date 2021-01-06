@@ -171,8 +171,12 @@ cd $BASEDIR
 
 
 
-mkdir -p $JAKARTA_JARS/modules/
-mvn dependency:copy-dependencies -DoutputDirectory="${JAKARTA_JARS}/modules" -Dmdep.stripVersion=true
+ls $BASEDIR/docker/pom.xml
+
+mkdir -p $JAKARTA_JARS/modules
+mkdir -p $JAKARTA_JARS/endorsed
+
+mvn -f $BASEDIR/docker/pom.xml dependency:copy-dependencies -DoutputDirectory="${JAKARTA_JARS}/modules" -Dmdep.stripVersion=true
 
 ls $JAKARTA_JARS/modules/
 #wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
