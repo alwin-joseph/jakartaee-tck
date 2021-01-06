@@ -27,13 +27,8 @@ export PATH=$JAVA_HOME/bin:$ANT_HOME/bin:$PATH
 cd $WORKSPACE
 export BASEDIR=`pwd`
 
-if [ -z "$GF_HOME" ]; then
-  export GF_HOME=$BASEDIR
-fi
-
-
-if [ -z "$GF_TOPLEVEL_DIR" ]; then
-  export GF_TOPLEVEL_DIR=glassfish6
+if [ -z "$JAKARTA_JARS" ]; then
+  export JAKARTA_JARS=$BASEDIR
 fi
 
 if [ ! -z "$TCK_BUNDLE_BASE_URL" ]; then
@@ -75,119 +70,121 @@ ant -version
 which java
 java -version
 
-export ANT_OPTS="-Xmx2G -Djava.endorsed.dirs=${GF_HOME}/$GF_TOPLEVEL_DIR/glassfish/modules/endorsed \
+export ANT_OPTS="-Xmx2G -Djava.endorsed.dirs=${JAKARTA_JARS}/endorsed \
                  -Djavax.xml.accessExternalStylesheet=all \
                  -Djavax.xml.accessExternalSchema=all \
 		 -DenableExternalEntityProcessing=true \
                  -Djavax.xml.accessExternalDTD=file,http"
 
 echo ########## Remove hard-coded paths from install/jakartaee/bin/ts.jte ##########"
-sed -e "s#^javaee.home=.*#javaee.home=$GF_HOME/$GF_TOPLEVEL_DIR/glassfish#g" \
-    -e "s#^javaee.home.ri=.*#javaee.home.ri=$GF_HOME/$GF_TOPLEVEL_DIR/glassfish#g" \
+sed -e "s#^javaee.home=.*#javaee.home=$JAKARTA_JARS#g" \
+    -e "s#^javaee.home.ri=.*#javaee.home.ri=$JAKARTA_JARS#g" \
     -e "s#^report.dir=.*#report.dir=$BASEDIR/JTReport#g" \
     -e "s#^work.dir=.*#work.dir=$BASEDIR/JTWork#g" $BASEDIR/install/jakartaee/bin/ts.jte > $BASEDIR/install/jakartaee/bin/ts.jte.new
 mv $BASEDIR/install/jakartaee/bin/ts.jte.new $BASEDIR/install/jakartaee/bin/ts.jte
 
 #tools.jar from jdk8 has old apis
-sed -i -e 's#tools\.jar=.*#tools.jar='${GF_HOME//\//\\\/}'\/glassfish6\/glassfish\/modules\/webservices-tools.jar:'${GF_HOME//\//\\\/}'\/glassfish6\/glassfish\/modules\/webservices-api.jar#g' $BASEDIR/install/jakartaee/bin/ts.jte
+sed -i -e 's#tools\.jar=.*#tools.jar='${JAKARTA_JARS//\//\\\/}'\/modules\/webservices-tools.jar:'${JAKARTA_JARS//\//\\\/}'\/modules\/webservices-api.jar#g' $BASEDIR/install/jakartaee/bin/ts.jte
 
 echo "Contents of modified TS.JTE file"
 cat $BASEDIR/install/jakartaee/bin/ts.jte
 
 echo "########## Trunk.Install.V5 Config ##########"
 cd $BASEDIR
-if [ -z "$GF_BUNDLE_URL" ]; then
-  echo "Using default url for GF bundle: $DEFAULT_GF_BUNDLE_URL"
-  export GF_BUNDLE_URL=$DEFAULT_GF_BUNDLE_URL
-fi
-wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
-unzip -q -o latest-glassfish.zip
-ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
+#if [ -z "$GF_BUNDLE_URL" ]; then
+#  echo "Using default url for GF bundle: $DEFAULT_GF_BUNDLE_URL"
+#  export GF_BUNDLE_URL=$DEFAULT_GF_BUNDLE_URL
+#fi
+#wget --progress=bar:force --no-cache $GF_BUNDLE_URL -O latest-glassfish.zip
+#unzip -q -o latest-glassfish.zip
+#ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/bin
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/common
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/config
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/docs
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/domains
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/legal
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/lib
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/osgi
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/bin
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/common
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/config
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/docs
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/domains
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/legal
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/lib
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/osgi
 #find $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules -type f ! -name "*jakarta*" -exec rm -rf {} \;
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/a*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/b*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/c*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/d*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/e*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/f*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/a*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/b*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/c*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/d*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/e*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/f*.jar
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/g*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/h*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/i*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jackson*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jaspic*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/java*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jboss*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jdbc*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jersey*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jettison*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jms*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/g*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/h*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/i*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jackson*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jaspic*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/java*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jboss*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jdbc*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jersey*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jettison*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jms*.jar
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsch*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsf-connector*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsftemplating*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsonp-jaxrs*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jspcaching-connector*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsr109-impl*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jstl-connector*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jta*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jts*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jpa*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsch*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsf-connector*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsftemplating*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsonp-jaxrs*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jspcaching-connector*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jsr109-impl*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jstl-connector*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jta*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jts*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jpa*.jar
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/k*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/l*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/m*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/n*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/o*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/p*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/r*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/t*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/w*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/y*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/k*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/l*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/m*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/n*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/o*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/p*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/r*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/t*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/w*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/y*.jar
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/scattered-archive-api.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/schema2beans*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security-*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/shoal*.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/ssl-impl*.jar 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/soap-tcp*.jar 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/simple-glassfish-api*.jar 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stats77*.jar 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stax2-api*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/scattered-archive-api.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/schema2beans*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security-*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/shoal*.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/ssl-impl*.jar 
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/soap-tcp*.jar 
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/simple-glassfish-api*.jar 
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stats77*.jar 
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/stax2-api*.jar
 
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security.jar
-
-
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.el.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.enterprise.concurrent.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.security.enterprise.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.servlet.jsp.jar
-rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.servlet.jsp.jstl.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/security.jar
 
 
-
-#mkdir -p $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
-ls $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/3.0.0/jakarta.xml.bind-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.xml.bind-api.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-osgi/3.0.0/jaxb-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jaxb-osgi.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api/3.0.0/webservices-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-osgi/3.0.0/webservices-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-osgi.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api-osgi/3.0.0/webservices-api-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api-osgi.jar
-wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-tools/3.0.0/webservices-tools-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-tools.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.el.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.enterprise.concurrent.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.security.enterprise.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.servlet.jsp.jar
+#rm -rf $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.servlet.jsp.jstl.jar
 
 
-ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
+
+mkdir -p $JAKARTA_JARS/modules/
+mvn dependency:copy-dependencies -DoutputDirectory="${JAKARTA_JARS}/modules" -Dmdep.stripVersion=true
+
+ls $JAKARTA_JARS/modules/
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.0.0/jakarta.activation-api-2.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.activation.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/3.0.0/jakarta.xml.bind-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.xml.bind-api.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-osgi/3.0.0/jaxb-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jaxb-osgi.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api/3.0.0/webservices-api-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-osgi/3.0.0/webservices-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-osgi.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-api-osgi/3.0.0/webservices-api-osgi-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-api-osgi.jar
+#wget --progress=bar:force --no-cache https://repo1.maven.org/maven2/org/glassfish/metro/webservices-tools/3.0.0/webservices-tools-3.0.0.jar -O $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/webservices-tools.jar
+
+
+#ls -l $GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/
 
 #if [ ! -z "$GF_VERSION_URL" ]; then
 #  wget --progress=bar:force --no-cache $GF_VERSION_URL -O glassfish.version
@@ -202,7 +199,7 @@ echo "########## Trunk.Build ##########"
 ant -f $BASEDIR/install/jakartaee/bin/build.xml -Ddeliverabledir=jakartaee -Dbasedir=$BASEDIR/install/jakartaee/bin  modify.jstl.db.resources
 
 # Full workspace build.
-ant -f $BASEDIR/install/jakartaee/bin/build.xml -Ddeliverabledir=jakartaee -Dbasedir=$BASEDIR/install/jakartaee/bin -Djava.endorsed.dirs=$GF_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/endorsed build.all
+ant -f $BASEDIR/install/jakartaee/bin/build.xml -Ddeliverabledir=jakartaee -Dbasedir=$BASEDIR/install/jakartaee/bin -Djava.endorsed.dirs=$JAKARTA_JARS/endorsed build.all
 
 
 echo "########## Trunk.Sanitize.JTE ##########"
