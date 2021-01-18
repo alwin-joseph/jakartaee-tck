@@ -240,6 +240,11 @@
         <artifactId>webservices-tools</artifactId>
         <version>${webservices-tools.version}</version>
     </dependency>
+     <dependency>
+        <groupId>org.glassfish.security</groupId>
+        <artifactId>security</artifactId>
+        <version>3.2-b06</version>
+    </dependency>
   </dependencies>
 
   <build>
