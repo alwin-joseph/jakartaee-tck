@@ -25,6 +25,7 @@ import com.sun.javatest.Status;
 import com.sun.ts.tests.signaturetest.SigTest;
 import com.sun.ts.tests.signaturetest.SignatureTestDriver;
 import com.sun.ts.tests.signaturetest.SignatureTestDriverFactory;
+import com.sun.ts.tests.signaturetest.Jdk9SigTestDriver;
 
 /*
  * This class is a simple example of a signature test that extends the
