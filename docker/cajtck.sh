@@ -59,15 +59,17 @@ if [[ "$JDK" == "JDK11" || "$JDK" == "jdk11" ]];then
   export JAVA_HOME=${JDK11_HOME}
   export PATH=$JAVA_HOME/bin:$PATH
   cp ts.jte.jdk11 ts.jte
+  sed -i "s#^local.classes=.*#local.classes=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.annotation-api.ja:$JAVA_HOME/lib/modulesr#g" ts.jte
 else
   sed -i "s#^endorsed.dirs=.*#endorsed.dirs=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/endorsed#g" ts.jte
+  sed -i "s#^local.classes=.*#local.classes=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.annotation-api.jar#g" ts.jte
 fi
 
 which java
 java -version
 
 sed -i "s#^build.level=.*#build.level=2#g" ts.jte
-sed -i "s#^local.classes=.*#local.classes=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.annotation-api.jar#g" ts.jte
+#sed -i "s#^local.classes=.*#local.classes=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish/modules/jakarta.annotation-api.jar#g" ts.jte
 sed -i "s#^report.dir=.*#report.dir=$TCK_HOME/${TCK_NAME}report/${TCK_NAME}#g" ts.jte
 sed -i "s#^work.dir=.*#work.dir=$TCK_HOME/${TCK_NAME}work/${TCK_NAME}#g" ts.jte
 
