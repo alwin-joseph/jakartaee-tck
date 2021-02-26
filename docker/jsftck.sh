@@ -64,6 +64,7 @@ java -version
 cd $TCK_HOME/$GF_TOPLEVEL_DIR/bin
 ./asadmin start-domain
 
+cd $TS_HOME/bin
 webServerHome=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish
 
 sed -i "s#webServerHome=.*#webServerHome=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish#g" ts.jte
