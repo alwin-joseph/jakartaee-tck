@@ -46,7 +46,7 @@
         <copy todir="${deliverable.bundle.dir}/bin" includeEmptyDirs="no">
             <fileset dir="${ts.home}/install/${deliverable.name.lower}/bin"
                      includes="**/*"
-                     excludes="ts.jte.*, **/workspace.xml, **/*.log, **/out"/>
+                     excludes="**/workspace.xml, **/*.log, **/out"/>
         </copy>
         <copy todir="${deliverable.bundle.dir}/lib">
             <fileset dir="${ts.home}/lib"

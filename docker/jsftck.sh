@@ -51,9 +51,6 @@ unzip -q ${TCK_HOME}/latest-glassfish.zip -d ${TCK_HOME}
 TS_HOME=$TCK_HOME/$TCK_NAME
 echo "TS_HOME $TS_HOME"
 
-cd $TCK_HOME/$GF_TOPLEVEL_DIR/bin
-./asadmin start-domain
-
 cd $TS_HOME/bin
 if [[ "$JDK" == "JDK11" || "$JDK" == "jdk11" ]];then
   export JAVA_HOME=${JDK11_HOME}
@@ -63,6 +60,9 @@ fi
 
 which java
 java -version
+
+cd $TCK_HOME/$GF_TOPLEVEL_DIR/bin
+./asadmin start-domain
 
 webServerHome=$TCK_HOME/$GF_TOPLEVEL_DIR/glassfish
 
