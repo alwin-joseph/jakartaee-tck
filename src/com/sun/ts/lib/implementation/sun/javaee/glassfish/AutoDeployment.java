@@ -353,14 +353,14 @@ public class AutoDeployment implements TSDeploymentInterface {
     sApp = sTSDeploymentDir + File.separator + sAppName + "Client.jar";
 
     if (executeArgs == null) {
-      executeArgs = sApp + ",arg=-name,arg=" + sClientname + " -jar " + sApp; // +
+      executeArgs = sApp + ",arg=-name,arg=" + sClientname + " -classpath "+ propMgr.getProperty("javaee.home", "/") + "/lib/gf-client.jar" + ":" + sApp; // +
                                                                               // "
                                                                               // -stubs
                                                                               // "
                                                                               // +
                                                                               // sClientClasspath;
     } else {
-      executeArgs = sApp + ",arg=-name,arg=" + sClientname + " -jar " + sApp
+      executeArgs = sApp + ",arg=-name,arg=" + sClientname + " -classpath "+ propMgr.getProperty("javaee.home", "/") + "/lib/gf-client.jar" + ":" + sApp
           + " " + executeArgs; // + " -name " + p.getProperty("client_name"); //
                                // + " -stubs " + sClientClasspath;
     }
