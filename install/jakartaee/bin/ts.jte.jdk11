@@ -555,7 +555,7 @@ derbyEmbedded.user=cts1
 derbyEmbedded.passwd=cts1
 derbyEmbedded.url=jdbc:derby:${derbyEmbedded.dbName};create=true
 derbyEmbedded.driver=org.apache.derby.jdbc.EmbeddedDriver
-derbyEmbedded.classes=${javaee.home}/../javadb/lib/derby.jar${pathsep}${javaee.home}/../javadb/lib/derbyshared.jar${pathsep}${ts.home}/lib/dbprocedures.jar
+derbyEmbedded.classes=${javaee.home}/../javadb/lib/derby.jar${pathsep}${javaee.home}/../javadb/lib/derbyshared.jar${pathsep}${javaee.home}/../javadb/lib/derbytools.jar${pathsep}${ts.home}/lib/dbprocedures.jar
 derbyEmbedded.poolName=cts-derbyEmbedded-pool
 derbyEmbedded.dataSource=org.apache.derby.jdbc.EmbeddedDataSource
 derbyEmbedded.pool.url='jdbc\\:derby\\:${derbyEmbedded.dbName}\\;create=true'
@@ -1075,9 +1075,9 @@ ts.run.classpath=${pathsep}${javaee.classes}${pathsep}${ts.home}/lib/tsharness.j
 ts.harness.classpath=${ts.home}/lib/jaxb-api.jar${pathsep}${ts.home}/lib/jaxb-core.jar${pathsep}${ts.home}/lib/jaxb-impl.jar${pathsep}${ts.home}/lib/jaxb-xjc.jar${pathsep}${ts.home}/lib/tsharness.jar${pathsep}${ts.home}/lib/cts.jar${pathsep}${ts.home}/lib/glassfishporting.jar${pathsep}${ts.home}/lib/sigtest.jar${pathsep}${ts.run.classpath}${pathsep}${ts.home}/lib/javatest.jar${pathsep}${ts.home}/lib/jdom-1.1.3.jar${pathsep}${ant.home}/lib/ant.jar${pathsep}${ri.modules}/admin-cli.jar${pathsep}${ts.home}/lib/http.jar
 
 #classpath used for building CTS tests only (DO NOT MODIFY)
-ts.classpath=${ts.home}/lib/commons-lang3-3.3.2.jar${pathsep}${javaee.home.ri}/javadb/lib/derby.jar${pathsep}${javaee.home.ri}/javadb/lib/derbyshared.jar${pathsep}${ts.home}/lib/tsharness.jar${pathsep}${ts.home}/lib/cts.jar${pathsep}${ts.home}/lib/glassfishporting.jar${pathsep}${ts.home}/lib/sigtest.jar${pathsep}${ts.run.classpath}${pathsep}${ts.run.classpath.ri}${pathsep}${ts.home}/lib/javatest.jar${pathsep}${ts.home}/lib/jdom-1.1.3.jar${pathsep}${ant.home}/lib/ant.jar${pathsep}${ts.home}/lib/commons-httpclient-3.1.jar${pathsep}${ts.home}/lib/commons-logging-1.1.3.jar${pathsep}${ts.home}/lib/htmlunit-2.15.jar${pathsep}${ts.home}/lib/htmlunit-core-js-2.15.jar${pathsep}${ts.home}/lib/unboundid-ldapsdk.jar${pathsep}${ts.home}/lib/commons-codec-1.9.jar${pathsep}${ts.home}/lib/xml-apis-1.4.01.jar${pathsep}${ts.home}/lib/http.jar
+ts.classpath=${ts.home}/lib/commons-lang3-3.3.2.jar${pathsep}${javaee.home.ri}/javadb/lib/derby.jar${pathsep}${javaee.home.ri}/javadb/lib/derbyshared.jar${pathsep}${javaee.home.ri}/javadb/lib/derbytools.jar${pathsep}${ts.home}/lib/tsharness.jar${pathsep}${ts.home}/lib/cts.jar${pathsep}${ts.home}/lib/glassfishporting.jar${pathsep}${ts.home}/lib/sigtest.jar${pathsep}${ts.run.classpath}${pathsep}${ts.run.classpath.ri}${pathsep}${ts.home}/lib/javatest.jar${pathsep}${ts.home}/lib/jdom-1.1.3.jar${pathsep}${ant.home}/lib/ant.jar${pathsep}${ts.home}/lib/commons-httpclient-3.1.jar${pathsep}${ts.home}/lib/commons-logging-1.1.3.jar${pathsep}${ts.home}/lib/htmlunit-2.15.jar${pathsep}${ts.home}/lib/htmlunit-core-js-2.15.jar${pathsep}${ts.home}/lib/unboundid-ldapsdk.jar${pathsep}${ts.home}/lib/commons-codec-1.9.jar${pathsep}${ts.home}/lib/xml-apis-1.4.01.jar${pathsep}${ts.home}/lib/http.jar
 #classpath used for building cts.jar (DO NOT MODIFY)
-ts.lib.classpath=${javaee.home.ri}/javadb/lib/derby.jar${pathsep}${javaee.home.ri}/javadb/lib/derbyshared.jar${pathsep}${ts.harness.classpath}
+ts.lib.classpath=${javaee.home.ri}/javadb/lib/derby.jar${pathsep}${javaee.home.ri}/javadb/lib/derbyshared.jar${pathsep}${javaee.home.ri}/javadb/lib/derbytools.jar${pathsep}${ts.harness.classpath}
 
 
 ###############################################################
