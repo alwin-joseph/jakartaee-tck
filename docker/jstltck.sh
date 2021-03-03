@@ -59,6 +59,7 @@ if [[ "$JDK" == "JDK11" || "$JDK" == "jdk11" ]];then
   export JAVA_HOME=${JDK11_HOME}
   export PATH=$JAVA_HOME/bin:$PATH
   cp ts.jte.jdk11 ts.jte
+  export JAVA_OPTIONS="-Djava.locale.providers=COMPAT"
 fi
 
 which java
