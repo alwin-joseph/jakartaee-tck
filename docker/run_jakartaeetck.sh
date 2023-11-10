@@ -102,44 +102,24 @@ fi
 rm -Rf ${CTS_HOME}/ri
 mkdir -p ${CTS_HOME}/ri
 if [[ "interop" == ${test_suite} ]]; then
-  unzip ${CTS_HOME}/glassfish-5.0.zip -d ${CTS_HOME}/ri
+  unzip -q ${CTS_HOME}/glassfish-5.0.zip -d ${CTS_HOME}/ri
 else
-  unzip ${CTS_HOME}/latest-glassfish.zip -d ${CTS_HOME}/ri
+  unzip -q ${CTS_HOME}/latest-glassfish.zip -d ${CTS_HOME}/ri
 fi
 chmod -R 777 ${CTS_HOME}/ri
 
 export ADMIN_PASSWORD_FILE="${CTS_HOME}/admin-password.txt"
 echo "AS_ADMIN_PASSWORD=adminadmin" > ${ADMIN_PASSWORD_FILE}
-
 echo "AS_ADMIN_PASSWORD=" > ${CTS_HOME}/change-admin-password.txt
 echo "AS_ADMIN_NEWPASSWORD=adminadmin" >> ${CTS_HOME}/change-admin-password.txt
-
 echo "" >> ${CTS_HOME}/change-admin-password.txt
-# Action done on failure. Until now there's nothing to stop or package.
-set -e;
-on_exit () {
-  EXIT_CODE=$?
-  printf  "
-******************************************************
-* Stopping all servers                               *
-******************************************************
 
-"
-  set +e;
-  ps -lAf | grep java;
-  if [ -d "${CTS_HOME}/ri/${GF_RI_TOPLEVEL_DIR}" ]; then
-    "${CTS_HOME}/ri/${GF_RI_TOPLEVEL_DIR}/glassfish/bin/asadmin" stop-domain --kill || true;
-  fi
-  if [ -d "${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}" ]; then
-    "${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/glassfish/bin/asadmin" stop-domain --kill || true;
-    "${JAVA_HOME}/bin/java" -Dderby.system.home="${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/databases"\
-      -classpath "${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derbynet.jar\
-:${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derby.jar\
-:${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derbyshared.jar\
-:${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derbytools.jar"\
-      org.apache.derby.drda.NetworkServerControl -h localhost -p 1527 shutdown || true;
-  fi
-  printf  "
+if [ -d "${CTS_HOME}/ri/glassfish5" ]; then
+  "${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin" stop-domain --kill || true;
+fi
+if [ -d "${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}" ]; then
+  "${CTS_HOME}/vi/glassfish5/glassfish/bin/asadmin" stop-domain --kill || true;
+fi
 
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${CTS_HOME}/change-admin-password.txt change-admin-password
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
@@ -147,7 +127,7 @@ ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${AD
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} enable-secure-admin
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} version
-${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain
+${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain --kill
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
 
 # Change default ports for RI
@@ -156,11 +136,11 @@ ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${AD
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} set server-config.jms-service.jms-host.default_JMS_host.port=7776
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${CTS_HOME}/change-admin-password.txt change-admin-password
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
-${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain
+${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain --kill
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} enable-secure-admin
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} version
-${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain
+${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain --kill
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
 
 # Change default ports for RI
@@ -193,7 +173,7 @@ done
 ##### installGlassFish.sh starts here #####
 
 mkdir -p ${CTS_HOME}/vi
-unzip ${CTS_HOME}/latest-glassfish.zip -d ${CTS_HOME}/vi
+unzip -q ${CTS_HOME}/latest-glassfish.zip -d ${CTS_HOME}/vi
 chmod -R 777 ${CTS_HOME}/vi
 
 if [[ $test_suite == ejb30/lite* ]] || [[ "ejb30" == $test_suite ]] ; then
