@@ -115,10 +115,35 @@ echo "AS_ADMIN_PASSWORD=" > ${CTS_HOME}/change-admin-password.txt
 echo "AS_ADMIN_NEWPASSWORD=adminadmin" >> ${CTS_HOME}/change-admin-password.txt
 
 echo "" >> ${CTS_HOME}/change-admin-password.txt
+# Action done on failure. Until now there's nothing to stop or package.
+set -e;
+on_exit () {
+  EXIT_CODE=$?
+  printf  "
+******************************************************
+* Stopping all servers                               *
+******************************************************
+
+"
+  set +e;
+  ps -lAf | grep java;
+  if [ -d "${CTS_HOME}/ri/${GF_RI_TOPLEVEL_DIR}" ]; then
+    "${CTS_HOME}/ri/${GF_RI_TOPLEVEL_DIR}/glassfish/bin/asadmin" stop-domain --kill || true;
+  fi
+  if [ -d "${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}" ]; then
+    "${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/glassfish/bin/asadmin" stop-domain --kill || true;
+    "${JAVA_HOME}/bin/java" -Dderby.system.home="${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/databases"\
+      -classpath "${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derbynet.jar\
+:${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derby.jar\
+:${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derbyshared.jar\
+:${CTS_HOME}/vi/${GF_VI_TOPLEVEL_DIR}/javadb/lib/derbytools.jar"\
+      org.apache.derby.drda.NetworkServerControl -h localhost -p 1527 shutdown || true;
+  fi
+  printf  "
 
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${CTS_HOME}/change-admin-password.txt change-admin-password
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
-${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain
+${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain --kill
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} enable-secure-admin
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} version
@@ -153,7 +178,7 @@ ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${AD
 
 sleep 5
 echo "Stopping RI domain"
-${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain
+${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --port 4848 stop-domain --kill
 sleep 5
 echo "Killing any RI java processes that were not stopped gracefully"
 echo "Pending process to be killed:"
@@ -186,7 +211,7 @@ ${CTS_HOME}/vi/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${CT
 ${CTS_HOME}/vi/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} start-domain
 ${CTS_HOME}/vi/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} version
 ${CTS_HOME}/vi/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} create-jvm-options -Djava.security.manager
-${CTS_HOME}/vi/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain
+${CTS_HOME}/vi/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} stop-domain --kill
 sleep 5
 echo "[killJava.sh] uname: LINUX"
 echo "Pending process to be killed:"
@@ -344,7 +369,7 @@ ant add.interop.certs
 ### restartRI.sh starts here #####
 cd ${CTS_HOME}
 export PORT=5858
-${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} -p ${PORT} stop-domain
+${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} -p ${PORT} stop-domain --kill
 ${CTS_HOME}/ri/glassfish5/glassfish/bin/asadmin --user admin --passwordfile ${ADMIN_PASSWORD_FILE} -p ${PORT} start-domain
 ### restartRI.sh ends here #####
 
@@ -390,37 +415,6 @@ fi
 
 cd $TS_HOME/bin;
 # Check if there are any failures in the test. If so, re-run those tests.
-FAILED_COUNT=0
-ERROR_COUNT=0
-TEST_SUITE=`echo "${test_suite}" | tr '/' '_'`
-FAILED_COUNT=`cat ${JT_REPORT_DIR}/${TEST_SUITE}/text/summary.txt | grep 'Failed.' | wc -l`
-ERROR_COUNT=`cat ${JT_REPORT_DIR}/${TEST_SUITE}/text/summary.txt | grep 'Error.' | wc -l`
-if [[ $FAILED_COUNT -gt 0 || $ERROR_COUNT -gt 0 ]]; then
-  echo "One or more tests failed. Failure count:$FAILED_COUNT/Error count:$ERROR_COUNT"
-  echo "Re-running only the failed, error tests"
-if [ -z "$KEYWORDS" ]; then
-  if [[ "jbatch" == ${test_suite} ]]; then
-    cd $TS_HOME/src/com/ibm/jbatch/tck;
-    ant runclient -DpriorStatus=fail -Dwork.dir=${JT_WORK_DIR}/jbatch -Dreport.dir=${JT_REPORT_DIR}/jbatch
-  else
-    ant -f xml/impl/glassfish/s1as.xml run.cts -Dant.opts="${CTS_ANT_OPTS} ${ANT_OPTS}" -Drun.client.args="-DpriorStatus=fail,error"  -DbuildJwsJaxws=false -Dtest.areas="${test_suite}"
-  fi
-else
-  if [[ "jbatch" == ${test_suite} ]]; then
-    cd $TS_HOME/src/com/ibm/jbatch/tck;
-    ant runclient -DpriorStatus=fail -Dkeywords=\"${KEYWORDS}\" -Dwork.dir=${JT_WORK_DIR}/jbatch -Dreport.dir=${JT_REPORT_DIR}/jbatch;
-  else
-    ant -f xml/impl/glassfish/s1as.xml run.cts -Dkeywords=\"${KEYWORDS}\" -Dant.opts="${CTS_ANT_OPTS} ${ANT_OPTS}" -Drun.client.args="-DpriorStatus=fail,error"  -DbuildJwsJaxws=false -Dtest.areas="${test_suite}"
-  fi
-fi
-  # Generate combined report for both the runs.
-if [[ "jbatch" == ${test_suite} ]]; then
-  ant -Dreport.for=com/ibm/jbatch/tck -Dwork.dir=${JT_WORK_DIR}/jbatch -Dreport.dir=${JT_REPORT_DIR}/jbatch report
-else  
-  ant -Dreport.for=com/sun/ts/tests/$test_suite -Dreport.dir=${JT_REPORT_DIR}/${TEST_SUITE} -Dwork.dir=${JT_WORK_DIR}/${TEST_SUITE} report
-fi
-
-fi
 
 export HOST=`hostname -f`
 echo "1 ${TEST_SUITE} ${HOST}" > ${CTS_HOME}/args.txt
