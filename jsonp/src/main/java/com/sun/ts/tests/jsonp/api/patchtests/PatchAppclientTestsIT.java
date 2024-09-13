@@ -16,6 +16,7 @@
 
 package com.sun.ts.tests.jsonp.api.patchtests;
 
+import java.io.PrintWriter;
 import java.util.stream.Collectors;
 import java.nio.charset.StandardCharsets;
 import java.io.InputStreamReader;
@@ -25,6 +26,8 @@ import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.Properties;
 import java.net.URL;
+
+import com.sun.ts.lib.harness.Status;
 import com.sun.ts.tests.jsonp.api.common.JsonPTest;
 import com.sun.ts.tests.jsonp.api.common.TestResult;
 import com.sun.ts.lib.harness.ServiceEETest;
@@ -93,11 +96,13 @@ public class PatchAppclientTestsIT extends ServiceEETest {
   
     JavaArchive patchtests_appclient_vehicle_client = ShrinkWrap.create(JavaArchive.class, "patchtests_appclient_vehicle_client.jar");
     patchtests_appclient_vehicle_client.addClass(PatchAppclientTestsIT.class)
+      .addClass(CommonOperation.class)
+      .addClass(PatchCreate.class)
+      .addPackage(TestResult.class.getPackage())
       .addClass(com.sun.ts.tests.common.vehicle.VehicleRunnerFactory.class)
       .addClass(com.sun.ts.tests.common.vehicle.VehicleRunnable.class)
       .addClass(com.sun.ts.tests.common.vehicle.VehicleClient.class)
       .addClass(com.sun.ts.tests.common.vehicle.EmptyVehicleRunner.class)
-      .addClass(com.sun.ts.tests.jsonp.common.JSONP_Data.class)
       .addClass(com.sun.ts.tests.jsonp.common.JSONP_Util.class)
       .addClass(com.sun.ts.tests.jsonp.common.MyBufferedReader.class)
       .addClass(com.sun.ts.tests.jsonp.common.MyBufferedWriter.class)
@@ -121,6 +126,12 @@ public class PatchAppclientTestsIT extends ServiceEETest {
     ear.addAsModule(patchtests_appclient_vehicle_client);
     return ear;
 
+  }
+
+  public static void main(String[] args) {
+    PatchAppclientTestsIT theTests = new PatchAppclientTestsIT();
+    Status s = theTests.run(args, new PrintWriter(System.out), new PrintWriter(System.err));
+    s.exit();
   }
 
     /*
