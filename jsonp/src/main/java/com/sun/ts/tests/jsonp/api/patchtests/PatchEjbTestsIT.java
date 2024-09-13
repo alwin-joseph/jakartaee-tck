@@ -121,12 +121,13 @@ public class PatchEjbTestsIT extends ServiceEETest {
     JavaArchive patchtests_ejb_vehicle_ejb = ShrinkWrap.create(JavaArchive.class, "patchtests_ejb_vehicle_ejb.jar");
     // The class files
     patchtests_ejb_vehicle_ejb.addClasses(
+        CommonOperation.class,
+        PatchCreate.class,
         com.sun.ts.tests.common.vehicle.VehicleRunnerFactory.class,
         com.sun.ts.lib.harness.EETest.Fault.class,
         com.sun.ts.tests.common.vehicle.ejb.EJBVehicle.class,
         com.sun.ts.tests.common.vehicle.VehicleRunnable.class,
         com.sun.ts.tests.common.vehicle.ejb.EJBVehicleRemote.class,
-        // com.sun.ts.tests.common.vehicle.ejb.EJBVehicleHome.class,
         com.sun.ts.lib.harness.EETest.class,
         com.sun.ts.lib.harness.ServiceEETest.class,
         com.sun.ts.lib.harness.EETest.SetupException.class,
@@ -139,6 +140,7 @@ public class PatchEjbTestsIT extends ServiceEETest {
         com.sun.ts.tests.jsonp.common.MyJsonLocation.class,
         PatchEjbTestsIT.class
     );
+    patchtests_ejb_vehicle_ejb.addPackage(TestResult.class.getPackage());
     // The ejb-jar.xml descriptor
     URL ejbResURL = PatchEjbTestsIT.class.getClassLoader().getResource(packagePath+"/ejb_vehicle_ejb.xml");
     if(ejbResURL != null) {

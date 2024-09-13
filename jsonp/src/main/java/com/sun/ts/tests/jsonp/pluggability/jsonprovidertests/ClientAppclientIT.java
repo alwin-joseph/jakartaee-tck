@@ -150,7 +150,7 @@ public class ClientAppclientIT extends ServiceEETest {
     if(resURL != null) {
       jsonprovidertests_appclient_vehicle_client.addAsManifestResource(resURL, "application-client.xml");
     }
-    jsonprovidertests_appclient_vehicle_client.addAsManifestResource(new StringAsset("Main-Class: " + ClientAppclientIT.class.getName() + "\n"), "MANIFEST.MF");
+    jsonprovidertests_appclient_vehicle_client.addAsManifestResource(new StringAsset("Main-Class: com.sun.ts.tests.common.vehicle.VehicleClient"), "MANIFEST.MF");
 
 
     JavaArchive jarArchive = ShrinkWrap.create(JavaArchive.class, "jsonp_alternate_provider.jar")
@@ -215,11 +215,11 @@ public class ClientAppclientIT extends ServiceEETest {
 
   private String providerPath = null;
 
-  // public static void main(String[] args) {
-  //   Client theTests = new Client();
-  //   Status s = theTests.run(args, System.out, System.err);
-  //   s.exit();
-  // }
+  public static void main(String[] args) {
+    ClientAppclientIT theTests = new ClientAppclientIT();
+     Status s = theTests.run(args, System.out, System.err);
+     s.exit();
+  }
 
   /* Test setup */
 

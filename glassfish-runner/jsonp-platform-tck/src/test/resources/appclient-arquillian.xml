@@ -16,10 +16,40 @@
             <property name="runClient">true</property>
             <property name="runAsVehicle">true</property>
             <property name="clientEarDir">target/appclient</property>
+            <property name="unpackClientEar">true</property>
             <!-- Need to populate from ts.jte command.testExecuteAppClient setting for glassfish -->
-            <property name="clientCmdLineString">${jboss.home}/bin/appclient.sh;-y;target/test-classes/appclient.yml;-y;target/test-classes/derby.yml;${clientEarDir}/${vehicleArchiveName}.ear#${vehicleArchiveName}_client.jar</property>
+            <property name="clientCmdLineString">target/glassfish8/glassfish/bin/appclient \
+                -Djdk.tls.client.enableSessionTicketExtension=false \
+                -Djdk.tls.server.enableSessionTicketExtension=false \
+                -Djava.security.policy=${glassfish.home}/lib/appclient/client.policy \
+                -Dcts.tmp=$harness.temp.directory \
+                -Djava.security.auth.login.config=${glassfish.home}/lib/appclient/appclientlogin.conf \
+                -Djava.protocol.handler.pkgs=javax.net.ssl \
+                -Djavax.net.ssl.keyStore=${ts.home}/bin/certificates/clientcert.jks \
+                -Djavax.net.ssl.keyStorePassword=changeit \
+                -Djavax.net.ssl.trustStore=${ri.domain}/config/cacerts.jks \
+                -Djavax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl \
+                -Djavax.xml.parsers.DocumentBuilderFactory=com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl \
+                -Djavax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl \
+                -Dorg.xml.sax.driver=com.sun.org.apache.xerces.internal.parsers.SAXParser \
+                -Dorg.xml.sax.parser=org.xml.sax.helpers.XMLReaderAdapter \
+                -Doracle.jdbc.J2EE13Compliant=true \
+                -Doracle.jdbc.mapDateToTimestamp \
+                -Dstartup.login=false \
+                -Dauth.gui=false \
+                -Dlog.file.location=${log.file.location} \
+                -Dri.log.file.location=${ri.log.file.location} \
+                -DwebServerHost.2=${webServerHost.2} \
+                -DwebServerPort.2=${webServerPort.2} \
+                -Dprovider.configuration.file=${provider.configuration.file} \
+                -Ddeliverable.class=${deliverable.class} \
+                -jar \
+                ${clientEarDir}/${clientAppArchive}
+            </property>
+            <property name="cmdLineArgSeparator">\\</property>
             <!-- Pass ENV vars here -->
-            <property name="clientEnvString">CLASSPATH=${project.build.directory}/appclient/javatest.jar:${project.build.directory}/appclient/libutil.jar:${project.build.directory}/appclient/libcommon.jar</property>
+            <property name="clientEnvString">PATH=${env.PATH};LD_LIBRARY_PATH=${glassfish.home}/lib;AS_DEBUG=true;
+                APPCPATH=target/appclient/lib/arquillian-protocol-lib.jar:target/appclient/lib/arquillian-core.jar:target/appclient/lib/arquillian-junit5.jar</property>
             <property name="clientDir">${project.basedir}</property>
             <property name="workDir">${ts.home}/tmp</property>
             <property name="tsJteFile">${ts.home}/bin/ts.jte</property>
