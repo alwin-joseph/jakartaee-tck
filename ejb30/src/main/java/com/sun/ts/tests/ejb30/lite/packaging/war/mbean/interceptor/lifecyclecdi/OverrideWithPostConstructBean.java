@@ -21,11 +21,12 @@ package com.sun.ts.tests.ejb30.lite.packaging.war.mbean.interceptor.lifecyclecdi
 
 import com.sun.ts.tests.ejb30.common.helper.Helper;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 
-@ManagedBean("OverrideWithPostConstructBean")
+@Named("OverrideWithPostConstructBean")
 public class OverrideWithPostConstructBean extends OverrideBeanBase {
   private static final String simpleName = "OverrideWithPostConstructBean";
 

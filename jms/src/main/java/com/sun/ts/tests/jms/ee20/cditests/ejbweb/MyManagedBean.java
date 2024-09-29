@@ -25,7 +25,8 @@ import java.util.Properties;
 import com.sun.ts.lib.util.RemoteLoggingInitException;
 import com.sun.ts.lib.util.TestUtil;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.inject.Inject;
@@ -36,7 +37,7 @@ import jakarta.jms.Queue;
 import jakarta.jms.TextMessage;
 import jakarta.jms.Topic;
 
-@ManagedBean(value = "mybean")
+@Named(value = "mybean")
 public class MyManagedBean implements Serializable {
   private static final long serialVersionUID = 1L;
 

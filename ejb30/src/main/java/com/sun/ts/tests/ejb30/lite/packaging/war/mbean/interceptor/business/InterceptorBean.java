@@ -31,12 +31,14 @@ import com.sun.ts.tests.ejb30.lite.interceptor.common.business.InterceptorBaseBa
 import com.sun.ts.tests.ejb30.lite.interceptor.common.business.InterceptorBeanBase;
 import com.sun.ts.tests.ejb30.lite.interceptor.common.business.InterceptorIF;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptors;
 import jakarta.interceptor.InvocationContext;
 
-@ManagedBean
+// @ManagedBean
+@Named
 @Interceptors({ Interceptor2.class, Interceptor1.class, Interceptor3.class,
     Interceptor5.class, Interceptor4.class })
 public class InterceptorBean extends InterceptorBeanBase

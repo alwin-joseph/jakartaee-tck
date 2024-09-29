@@ -21,12 +21,14 @@ package com.sun.ts.tests.ejb30.assembly.appres.common;
 
 import com.sun.ts.tests.ejb30.common.helloejbjar.HelloRemoteIF;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.ejb.EJB;
 
-@ManagedBean("test-managed-bean")
+// @ManagedBean("test-managed-bean")
+@Named
 public class AppResManagedBean extends AppResBeanBase {
   public static final String NAME = "AppResManagedBean";
 

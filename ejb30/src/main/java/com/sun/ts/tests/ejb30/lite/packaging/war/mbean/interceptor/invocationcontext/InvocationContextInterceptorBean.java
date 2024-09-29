@@ -22,10 +22,11 @@ package com.sun.ts.tests.ejb30.lite.packaging.war.mbean.interceptor.invocationco
 import com.sun.ts.tests.ejb30.common.invocationcontext.InvocationContextBase;
 import com.sun.ts.tests.ejb30.common.invocationcontext.InvocationContextIF;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.interceptor.Interceptors;
 
-@ManagedBean("InvocationContextInterceptorBean")
+@Named("InvocationContextInterceptorBean")
 @Interceptors(com.sun.ts.tests.ejb30.common.invocationcontext.InterceptorForAll.class)
 public class InvocationContextInterceptorBean extends InvocationContextBase
     implements InvocationContextIF {

@@ -26,14 +26,16 @@ import com.sun.ts.tests.ejb30.lite.interceptor.common.business.InterceptorBaseBa
 import com.sun.ts.tests.ejb30.lite.interceptor.common.business.InterceptorBeanBase;
 import com.sun.ts.tests.ejb30.lite.interceptor.common.business.InterceptorIF;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.ExcludeClassInterceptors;
 import jakarta.interceptor.ExcludeDefaultInterceptors;
 import jakarta.interceptor.Interceptors;
 import jakarta.interceptor.InvocationContext;
 
-@ManagedBean
+// @ManagedBean
+@Named
 @ExcludeDefaultInterceptors
 public class InterceptorOverrideBean extends InterceptorBeanBase
     implements InterceptorIF {

@@ -21,10 +21,11 @@ package com.sun.ts.tests.ejb30.lite.packaging.war.mbean.interceptor.lifecycle;
 
 import com.sun.ts.tests.ejb30.common.helper.Helper;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.annotation.PreDestroy;
 
-@ManagedBean("AManagedBean")
+@Named("AManagedBean")
 public class AManagedBean {
 
   public int identityHashCode() {

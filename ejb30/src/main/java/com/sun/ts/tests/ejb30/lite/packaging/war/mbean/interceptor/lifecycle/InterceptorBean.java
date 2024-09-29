@@ -31,14 +31,15 @@ import com.sun.ts.tests.ejb30.lite.interceptor.common.lifecycle.Interceptor8;
 import com.sun.ts.tests.ejb30.lite.interceptor.common.lifecycle.InterceptorBeanBase;
 import com.sun.ts.tests.ejb30.lite.interceptor.common.lifecycle.InterceptorIF;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.annotation.PostConstruct;
 import jakarta.interceptor.Interceptors;
 
 //2, 1 & 3 are prepended here to replace default interceptors.  In other
 //test directories (e.g., lite/interceptor/singleton/lifecycle/annotated,
 //2, 1 & 3 are specified as default interceptors.
-@ManagedBean("InterceptorBean")
+@Named("InterceptorBean")
 @Interceptors({ Interceptor2.class, Interceptor1.class, Interceptor3.class,
     Interceptor5.class, Interceptor4.class, Interceptor8.class })
 public class InterceptorBean extends InterceptorBeanBase

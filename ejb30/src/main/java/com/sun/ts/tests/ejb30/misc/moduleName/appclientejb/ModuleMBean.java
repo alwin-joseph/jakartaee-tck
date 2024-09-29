@@ -25,10 +25,11 @@ import com.sun.ts.tests.ejb30.assembly.appres.common.AppResBeanBase;
 import com.sun.ts.tests.ejb30.assembly.appres.common.AppResRemoteIF;
 import com.sun.ts.tests.ejb30.common.helper.Helper;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.annotation.PostConstruct;
 
-@ManagedBean("ModuleMBean")
+@Named("ModuleMBean")
 public class ModuleMBean extends AppResBeanBase implements AppResRemoteIF {
 
   @SuppressWarnings("unused")

@@ -22,11 +22,12 @@ package com.sun.ts.tests.ejb30.lite.packaging.war.mbean.interceptor.lifecycle;
 import com.sun.ts.tests.ejb30.lite.interceptor.common.lifecycle.InterceptorBeanBase;
 import com.sun.ts.tests.ejb30.lite.interceptor.common.lifecycle.InterceptorIF;
 
-import jakarta.annotation.ManagedBean;
+// import jakarta.annotation.ManagedBean;
+import jakarta.inject.Named;
 import jakarta.annotation.PostConstruct;
 import jakarta.interceptor.ExcludeDefaultInterceptors;
 
-@ManagedBean("InterceptorOverride34Bean")
+@Named("InterceptorOverride34Bean")
 @ExcludeDefaultInterceptors
 public class InterceptorOverride34Bean extends InterceptorBeanBase
     implements InterceptorIF {
