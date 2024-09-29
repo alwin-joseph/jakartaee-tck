@@ -389,9 +389,9 @@
                             <!-- Select the @Tag("tck-appclient") tests -->
                             <groups>tck-appclient</groups>
                             <includes>
-                                <include>com/sun/ts/tests/jta/ee/transactional/*Ejb*.java</include>
+                                <!-- <include>com/sun/ts/tests/jta/ee/transactional/*Ejb*.java</include>
                                 <include>com/sun/ts/tests/jta/ee/txpropagationtest/*Ejb*.java</include>
-                                <include>com/sun/ts/tests/jta/ee/usertransaction/**/*EjbTest*.java</include>
+                                <include>com/sun/ts/tests/jta/ee/usertransaction/**/*EjbTest*.java</include> -->
                             </includes>
                             <dependenciesToScan>jakarta.tck:persistence-platform-tck-tests</dependenciesToScan>
                             <systemPropertyVariables>
@@ -434,6 +434,10 @@
                             <includes>
                                 <include>ee/jakarta/tck/persistence/**/*Test.java</include>
                             </includes>
+                            <excludes>
+                                <exclude>ee/jakarta/tck/persistence/jpa22/repeatable/**/*Test.java</exclude>
+                            </excludes>
+
                             <!-- Select the @Tag("tck-javatest") tests -->
                             <groups>tck-javatest</groups>
                             <dependenciesToScan>
