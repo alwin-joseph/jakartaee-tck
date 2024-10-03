@@ -329,6 +329,7 @@
                                 <harness.log.traceflag>true</harness.log.traceflag>
                                 <cts.harness.debug>true</cts.harness.debug>
                                 <java.io.tmpdir>/tmp</java.io.tmpdir>
+                                <project.basedir>${project.basedir}</project.basedir>
                                 <arquillian.xml>arquillian.xml</arquillian.xml>
                             </systemPropertyVariables>
                             <environmentVariables>
@@ -392,6 +393,7 @@
                                 <harness.log.traceflag>true</harness.log.traceflag>
                                 <cts.harness.debug>true</cts.harness.debug>
                                 <java.io.tmpdir>/tmp</java.io.tmpdir>
+                                <project.basedir>${project.basedir}</project.basedir>
                                 <arquillian.xml>arquillian.xml</arquillian.xml>
                             </systemPropertyVariables>
                             <environmentVariables>
