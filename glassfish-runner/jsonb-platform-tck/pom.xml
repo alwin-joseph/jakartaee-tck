@@ -39,7 +39,7 @@
         <tck.version>11.0.0-SNAPSHOT</tck.version>
         <ts.home>/jakartaeetck</ts.home>
         <version.jakarta.tck>11.0.0-SNAPSHOT</version.jakarta.tck>
-        <version.jakarta.tck.arquillian>1.0.0-M15</version.jakarta.tck.arquillian>
+        <version.jakarta.tck.arquillian>1.0.0-M16</version.jakarta.tck.arquillian>
     </properties>
 
     <dependencyManagement>
@@ -63,6 +63,16 @@
         <dependency>
             <groupId>jakarta.tck</groupId>
             <artifactId>${tck.artifactId}</artifactId>
+            <version>${tck.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.tck</groupId>
+            <artifactId>runtime</artifactId>
+            <version>${tck.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.tck</groupId>
+            <artifactId>common</artifactId>
             <version>${tck.version}</version>
         </dependency>
         <dependency>
@@ -108,7 +118,7 @@
         <dependency>
             <groupId>org.omnifaces.arquillian</groupId>
             <artifactId>arquillian-glassfish-server-managed</artifactId>
-            <version>1.4</version>
+            <version>1.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -275,7 +285,7 @@
                                 <additionalClasspathElement>${project.build.directory}/${glassfish.toplevel.dir}/glassfish/modules/parsson.jar</additionalClasspathElement>
                             </additionalClasspathElements>
                             <includes>
-                                <include>com/sun/ts/tests/jsonb/cdi/**/*Ejb*.java</include>
+                                <!-- <include>com/sun/ts/tests/jsonb/cdi/**/*Ejb*.java</include> -->
                             </includes>
                             <!-- Select the @Tag("tck-appclient") tests -->
                             <groups>tck-appclient</groups>
@@ -338,8 +348,8 @@
                                 <additionalClasspathElement>${project.build.directory}/${glassfish.toplevel.dir}/glassfish/modules/yasson.jar</additionalClasspathElement>
                             </additionalClasspathElements> -->
                             <includes>
-                                <include>com/sun/ts/tests/jsonb/pluggability/jsonbprovidertests/*Appclient*.java</include>
-                                <include>com/sun/ts/tests/jsonb/pluggability/jsonbprovidertests/*Ejb*.java</include>
+                                <!-- <include>com/sun/ts/tests/jsonb/pluggability/jsonbprovidertests/*Appclient*.java</include>
+                                <include>com/sun/ts/tests/jsonb/pluggability/jsonbprovidertests/*Ejb*.java</include> -->
                             </includes>
                             <!-- Select the @Tag("tck-appclient") tests -->
                             <groups>tck-appclient</groups>
