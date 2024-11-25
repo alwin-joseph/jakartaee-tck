@@ -938,7 +938,7 @@
                             </additionalClasspathElements>
                             <includes>
                                 <include>com/sun/ts/tests/jms/core20/jmscontexttopictests/ClientServletTest.java</include>
-                            </includes>                            
+                            </includes>
                             <!-- Select the @Tag("tck-javatest") tests -->
                             <groups>tck-javatest</groups>
                             <dependenciesToScan>jakarta.tck:${tck.artifactId}</dependenciesToScan>
