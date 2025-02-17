@@ -169,7 +169,7 @@
                             <sources>${project.build.directory}/jakartaeetck/artifacts/websocket-tck-platform-tests-${tck.test.websocket.extra.version}-sources.jar</sources>
                             <groupId>jakarta.tck</groupId>
                             <artifactId>websocket-tck-platform-tests</artifactId>
-                            <version>${tck.test.websocket.version}</version>
+                            <version>${tck.test.websocket.extra.version}</version>
                             <packaging>jar</packaging>
                         </configuration>
                     </execution>
