@@ -19,21 +19,26 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.rmi.RemoteException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class ServletNoVehicle<T extends EETest> extends HttpServlet {
+    static Logger log = Logger.getLogger(ServletNoVehicle.class.getName());
+    public ServletNoVehicle() {}
     protected Properties properties = null;
     protected String[] arguments = null;
     protected EETest testObj = null;
     protected String testName;
 
     public void init(ServletConfig config) throws ServletException {
-        TestUtil.logTrace("init " + this.getClass().getName() + " ...");
+        TestUtil.logMsg("init " + this.getClass().getName() + " ...");
+        log.info("ServletNoVehicle.init " + this.getClass().getName() + " ...");
         super.init(config);
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         try {
-            TestUtil.logTrace("ServletVehicle - In doGet");
+            TestUtil.logMsg("ServletVehicle - In doGet");
+            log.info("ServletNoVehicle.doGet - In doGet");
             Type t = getClass().getGenericSuperclass();
             ParameterizedType pt = (ParameterizedType) t;
             Class<EETest> testClass = (Class<EETest>) pt.getActualTypeArguments()[0];

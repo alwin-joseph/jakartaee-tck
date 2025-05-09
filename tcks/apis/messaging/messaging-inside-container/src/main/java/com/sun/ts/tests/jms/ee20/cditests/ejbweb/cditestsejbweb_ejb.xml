@@ -25,7 +25,7 @@
 		<session>
 			<ejb-name>CDITestsEjbWebClntBean</ejb-name>
 			<ejb-class>com.sun.ts.tests.jms.ee20.cditests.ejbweb.EjbClient</ejb-class>
-			<session-type>Stateful</session-type>
+			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<resource-ref>
 				<res-ref-name>jms/MyQueueConnectionFactory</res-ref-name>

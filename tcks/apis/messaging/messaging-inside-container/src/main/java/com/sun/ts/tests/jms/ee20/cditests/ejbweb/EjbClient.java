@@ -16,6 +16,8 @@
 
 package com.sun.ts.tests.jms.ee20.cditests.ejbweb;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Properties;
 
 import com.sun.ts.lib.util.RemoteLoggingInitException;
@@ -25,8 +27,7 @@ import com.sun.ts.lib.util.TestUtil;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.ejb.EJBException;
-import jakarta.ejb.Remote;
-import jakarta.ejb.Stateful;
+import jakarta.ejb.Stateless;
 import jakarta.inject.Inject;
 import jakarta.jms.ConnectionFactory;
 import jakarta.jms.IllegalStateRuntimeException;
@@ -42,7 +43,7 @@ import jakarta.jms.Topic;
 import jakarta.jms.TopicConnectionFactory;
 import jakarta.transaction.UserTransaction;
 
-@Stateful(name = "CDITestsEjbWebClntBean")
+@Stateless(name = "CDITestsEjbWebClntBean")
 // @Remote({ EjbClientIF.class })
 public class EjbClient implements EjbClientIF {
 
@@ -50,7 +51,7 @@ public class EjbClient implements EjbClientIF {
 
   private static final long serialVersionUID = 1L;
 
-  long timeout;
+  long timeout = 5000;
 
   private static int testsExecuted = 0;
 
@@ -116,6 +117,7 @@ public class EjbClient implements EjbClientIF {
   @PostConstruct
   public void postConstruct() {
     System.out.println("EjbClient:postConstruct()");
+    TestUtil.logMsg("EjbClient:postConstruct()");
     System.out.println("queue=" + queue);
     System.out.println("topic=" + topic);
     System.out.println("cfactory=" + cfactory);
@@ -391,7 +393,10 @@ public class EjbClient implements EjbClientIF {
             + printSessionMode(JMSContext.AUTO_ACKNOWLEDGE));
       }
     } catch (Exception e) {
-      TestUtil.logErr("Caught exception: " + e);
+      StringWriter sw = new StringWriter();
+      e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught exception:\n" + sw);
       pass = false;
     }
     return pass;
@@ -408,7 +413,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -418,7 +426,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -428,7 +439,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -438,7 +452,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -448,7 +465,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        e.printStackTrace();
+        TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -458,7 +478,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        e.printStackTrace();
+        TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -468,7 +491,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        e.printStackTrace();
+        TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -478,7 +504,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        e.printStackTrace();
+        TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -488,7 +517,10 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        e.printStackTrace();
+        TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
       TestUtil.logMsg(
@@ -498,11 +530,17 @@ public class EjbClient implements EjbClientIF {
       } catch (IllegalStateRuntimeException e) {
         TestUtil.logMsg("Caught expected IllegalStateRuntimeException");
       } catch (Exception e) {
-        TestUtil.logErr("Caught unexpected Exception: " + e);
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        e.printStackTrace();
+        TestUtil.logErr("Caught unexpected exception:\n" + sw);
         pass = false;
       }
     } catch (Exception e) {
-      TestUtil.logErr("Caught exception: " + e);
+      StringWriter sw = new StringWriter();
+      e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught exception:\n" + sw);
       pass = false;
     }
     return pass;
@@ -532,7 +570,10 @@ public class EjbClient implements EjbClientIF {
       TestUtil.logMsg(
           "Exit method and let the next method call complete the JTA transaction");
     } catch (Exception e) {
-      TestUtil.logErr("Caught exception: " + e);
+      StringWriter sw = new StringWriter();
+      e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught exception:\n" + sw);
       pass = false;
     }
     return pass;
@@ -581,7 +622,10 @@ public class EjbClient implements EjbClientIF {
         }
       }
     } catch (Exception e) {
-      TestUtil.logErr("Caught exception: " + e);
+      StringWriter sw = new StringWriter();
+      e.printStackTrace(new PrintWriter(sw));
+      e.printStackTrace();
+      TestUtil.logErr("Caught exception:\n" + sw);
       pass = false;
     } finally {
       try {
