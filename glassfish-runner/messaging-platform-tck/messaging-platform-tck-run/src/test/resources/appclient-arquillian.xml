@@ -15,6 +15,9 @@
     <container qualifier="tck-appclient" default="true">
         <configuration>
             <property name="glassFishHome">target/glassfish8</property>
+            <property name="outputToConsole">true</property>
+            <property name="debug">false</property>
+            <property name="suspend">false</property>
         </configuration>
         <protocol type="appclient" default="true">
             <property name="runClient">true</property>
@@ -53,8 +56,8 @@
             <!-- Pass ENV vars here -->
             <!-- <property name="clientEnvString">PATH=${env.PATH};LD_LIBRARY_PATH=${glassfish.home}/lib;AS_DEBUG=true;
                 APPCPATH=${glassfish.home}/glassfish/lib/arquillian-protocol-lib.jar:${glassfish.home}/glassfish/lib/tck-porting-lib.jar:target/appclient/lib/arquillian-core.jar:target/appclient/lib/arquillian-junit5.jar:${glassfish.home}/glassfish/modules/security.jar</property> -->
-            <property name="clientEnvString">PATH=${env.PATH};LD_LIBRARY_PATH=${glassfish.home}/lib;AS_DEBUG=true;
-                APPCPATH=target/lib/arquillian-protocol-lib.jar:target/lib/tck-porting-lib.jar:target/appclient/lib/arquillian-core.jar:target/appclient/lib/arquillian-junit5.jar:${glassfish.home}/glassfish/modules/security.jar:${glassfish.home}/glassfish/lib/gf-client.jar</property>
+            <property name="clientEnvString">AS_JAVA=${env.JAVA_HOME};PATH=${env.PATH};LD_LIBRARY_PATH=${glassfish.home}/lib;AS_DEBUG=true;
+                APPCPATH=target/appclient/lib/arquillian-protocol-lib.jar:${glassfish.home}/glassfish/modules/security.jar:${glassfish.home}/glassfish/lib/gf-client.jar</property>
             <property name="clientDir">${project.basedir}</property>
             <property name="workDir">/tmp</property>
             <property name="tsJteFile">jakartaeetck/bin/ts.jte</property>

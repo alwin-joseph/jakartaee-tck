@@ -20,8 +20,6 @@ public interface EjbClientIF {
 
   public void init(java.util.Properties p);
 
-  public boolean echo(String testName);
-
   public boolean sendRecvQueueTestUsingCDIFromEjb();
 
   public boolean sendRecvTopicTestUsingCDIFromEjb();

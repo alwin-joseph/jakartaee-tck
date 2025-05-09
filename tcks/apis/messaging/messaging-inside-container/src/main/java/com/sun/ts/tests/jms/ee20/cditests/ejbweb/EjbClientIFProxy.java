@@ -44,11 +44,9 @@ public class EjbClientIFProxy implements InvocationHandler {
             ok = true;
         } else if(methodName.equals("toString")) {
             return Client.class.getName()+"-proxy";
-        } else if(methodName.startsWith("test")) {
+        } else {
             RemoteStatus status = sendGet(methodName);
             ok = status.toStatus().isPassed();
-        } else {
-            throw new UnsupportedOperationException("Method not supported: " + methodName);
         }
 
         return ok;
@@ -58,7 +56,8 @@ public class EjbClientIFProxy implements InvocationHandler {
         String host = TestUtil.getProperty(testProps, "webServerHost", "localhost");
         String port = TestUtil.getProperty(testProps, "webServerPort", "8080");
 
-        URI uri = URI.create("http://"+host + ":" + port + "/appclientproxy/appclient_novehicle?test=" + methodName);
+        URI uri = URI.create("http://"+host + ":" + port + "/appclient_novehicle/?test=" + methodName);
+        System.out.println("sendGet().uri: " + uri);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .GET()
@@ -66,6 +65,8 @@ public class EjbClientIFProxy implements InvocationHandler {
         HttpResponse<byte[]> response = HttpClient.newBuilder()
                 .build()
                 .send(request, HttpResponse.BodyHandlers.ofByteArray());
+        System.out.println("sendGet() response: " + response.statusCode());
+        System.out.println("sendGet() response.headers: " + response.headers());
         if (response.statusCode() != 200) {
             String msg = String.format("Failed to send %s(), status code %d",
                     methodName, response.statusCode());

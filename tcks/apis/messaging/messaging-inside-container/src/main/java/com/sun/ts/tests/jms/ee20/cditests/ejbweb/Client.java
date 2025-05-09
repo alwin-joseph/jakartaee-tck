@@ -51,7 +51,7 @@ public class Client extends EETest {
   private String SERVLET = "/cditestsejbweb_web/ServletTest";
 
   // @EJB(name = "ejb/CDITestsEjbWebClntBean")
-  static EjbClientIF ejbclient;
+  EjbClientIF ejbclient;
 
   private static final long serialVersionUID = 1L;
 
@@ -384,7 +384,7 @@ public class Client extends EETest {
       TestUtil.logMsg("--------------------------------");
       TestUtil.logMsg("sendRecvQueueTestUsingCDIFromEjb");
       TestUtil.logMsg("--------------------------------");
-      boolean passEjb = ejbclient.echo("sendRecvQueueTestUsingCDIFromEjb");
+      boolean passEjb = ejbclient.sendRecvQueueTestUsingCDIFromEjb();
       if (!passEjb) {
         pass = false;
         TestUtil.logErr("CDI injection test failed from Ejb");
@@ -425,7 +425,7 @@ public class Client extends EETest {
       TestUtil.logMsg("--------------------------------");
       TestUtil.logMsg("sendRecvTopicTestUsingCDIFromEjb");
       TestUtil.logMsg("--------------------------------");
-      boolean passEjb = ejbclient.echo("sendRecvTopicTestUsingCDIFromEjb");
+      boolean passEjb = ejbclient.sendRecvTopicTestUsingCDIFromEjb();
       if (!passEjb) {
         pass = false;
         TestUtil.logErr("CDI injection test failed from Ejb");
@@ -463,7 +463,7 @@ public class Client extends EETest {
       TestUtil.logMsg("-------------------------------------");
       TestUtil.logMsg("sendRecvUsingCDIDefaultFactoryFromEjb");
       TestUtil.logMsg("-------------------------------------");
-      boolean passEjb = ejbclient.echo("sendRecvUsingCDIDefaultFactoryFromEjb");
+      boolean passEjb = ejbclient.sendRecvUsingCDIDefaultFactoryFromEjb();
       if (!passEjb) {
         pass = false;
         TestUtil.logErr("CDI injection test failed from Ejb");
@@ -511,8 +511,7 @@ public class Client extends EETest {
       TestUtil.logMsg("---------------------------------------");
       TestUtil.logMsg("verifySessionModeOnCDIJMSContextFromEjb");
       TestUtil.logMsg("---------------------------------------");
-      boolean passEjb = ejbclient
-          .echo("verifySessionModeOnCDIJMSContextFromEjb");
+      boolean passEjb = ejbclient.verifySessionModeOnCDIJMSContextFromEjb();
       if (!passEjb) {
         pass = false;
         TestUtil.logErr("CDI injection test failed from Ejb");
@@ -551,8 +550,7 @@ public class Client extends EETest {
       TestUtil.logMsg("--------------------------------------");
       TestUtil.logMsg("testRestrictionsOnCDIJMSContextFromEjb");
       TestUtil.logMsg("--------------------------------------");
-      boolean passEjb = ejbclient
-          .echo("testRestrictionsOnCDIJMSContextFromEjb");
+      boolean passEjb = ejbclient.testRestrictionsOnCDIJMSContextFromEjb();
       if (!passEjb) {
         pass = false;
         TestUtil.logErr("CDI injection test failed from Ejb");
@@ -584,15 +582,14 @@ public class Client extends EETest {
       TestUtil.logMsg("------------------------------------------");
       TestUtil.logMsg("testActiveJTAUsingCDIAcross2MethodsFromEjb");
       TestUtil.logMsg("------------------------------------------");
-      boolean passEjb = ejbclient
-          .echo("testActiveJTAUsingCDICallMethod1FromEjb");
+      boolean passEjb = ejbclient.testActiveJTAUsingCDICallMethod1FromEjb();
       if (!passEjb) {
         pass = false;
         TestUtil.logErr("CDI injection test failed from Ejb");
       } else {
         TestUtil.logMsg("CDI injection test passed from Ejb");
       }
-      passEjb = ejbclient.echo("testActiveJTAUsingCDICallMethod2FromEjb");
+      passEjb = ejbclient.testActiveJTAUsingCDICallMethod2FromEjb();
       if (!passEjb) {
         pass = false;
         TestUtil.logErr("CDI injection test failed from Ejb");

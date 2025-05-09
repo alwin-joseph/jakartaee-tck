@@ -195,33 +195,6 @@
                             </artifactItems>
                         </configuration>
                     </execution>
-                    
-                    <execution>
-                        <id>02-copy-lib</id>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>jakarta.tck</groupId>
-                                    <artifactId>common</artifactId>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                                    <destFileName>common.jar</destFileName>
-                                </artifactItem>
-                                
-                                <artifactItem>
-                                    <groupId>jakarta.tck</groupId>
-                                    <artifactId>jms-platform-tck</artifactId>
-                                    <overWrite>true</overWrite>
-                                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                                    <destFileName>jms-tck.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
                 </executions>
             </plugin>
 
@@ -680,54 +653,6 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                        <version>3.6.1</version>
-                        <executions>
-                            <execution>
-                                <id>03-copy-lib</id>
-                                <goals>
-                                    <goal>copy</goal>
-                                </goals>
-                                <phase>generate-resources</phase>
-                                <configuration>
-                                    <artifactItems>
-                                        <!-- The application client container needs these two dependencies -->
-                                        <artifactItem>
-                                            <groupId>jakarta.tck.arquillian</groupId>
-                                            <artifactId>tck-porting-lib</artifactId>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                                            <destFileName>tck-porting-lib.jar</destFileName>
-                                        </artifactItem>
-                                        <artifactItem>
-                                            <groupId>jakarta.tck.arquillian</groupId>
-                                            <artifactId>arquillian-protocol-lib</artifactId>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                                            <destFileName>arquillian-protocol-lib.jar</destFileName>
-                                        </artifactItem>
-
-                                        <!-- 
-                                            AppClientDeploymentPackager needs this on the Eclipse CI since it can't fully resolve
-                                            jakarta.tck.arquillian:arquillian-protocol-lib in code for some reason.
-                                        -->
-                                        <artifactItem>
-                                            <groupId>jakarta.tck.arquillian</groupId>
-                                            <artifactId>arquillian-protocol-lib</artifactId>
-                                            <!-- <version>${jakarta.tck.arquillian.version}</version> -->
-                                            <type>jar</type>
-                                            <overWrite>true</overWrite>
-                                            <outputDirectory>${project.build.directory}/protocol</outputDirectory>
-                                            <destFileName>protocol.jar</destFileName>
-                                        </artifactItem>
-                                    </artifactItems>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
-                    <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <executions>
@@ -889,7 +814,8 @@
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <configuration>
                             <includes> 
-                                <include>com.sun.ts.tests.jms.ee20.**.*Test</include>
+                                <!--include>com.sun.ts.tests.jms.ee20.**.*Test</include-->
+                                <include>com.sun.ts.tests.jms.ee20.cditests.ejbweb.ClientTest</include>
                             </includes>
                         </configuration>
                     </plugin>

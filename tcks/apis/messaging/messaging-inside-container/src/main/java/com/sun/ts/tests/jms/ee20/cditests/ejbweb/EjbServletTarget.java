@@ -13,11 +13,11 @@ import java.util.logging.Logger;
 /**
  * Replaces the remote ejb call used by Client with a servlet call.
  */
-@WebServlet(name = "EjbServletTarget", urlPatterns = {"/appclient_novehicle"})
+@WebServlet(name = "EjbServletTarget", urlPatterns = {"/*"})
 public class EjbServletTarget extends ServletNoVehicle<Client> {
     private static final Logger log = Logger.getLogger(EjbServletTarget.class.getName());
     
-    @EJB
+    @EJB(name = "ejb/CDITestsEjbWebClntBean", beanName = "CDITestsEjbWebClntBean")
     EjbClientIF injectedBean;
 
     public EjbServletTarget() {

@@ -30,6 +30,12 @@
     </web>
   </module>
   <module>
+    <web>
+      <web-uri>appclientproxy.war</web-uri>
+      <context-root>appclient_novehicle</context-root>
+    </web>
+  </module>
+  <module>
     <ejb>cditestsejbweb_ejb.jar</ejb>
   </module>
 </application>
