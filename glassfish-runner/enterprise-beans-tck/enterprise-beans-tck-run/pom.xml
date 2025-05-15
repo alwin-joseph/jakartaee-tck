@@ -69,13 +69,15 @@
         <version.jakarta.enterprise>4.0.1</version.jakarta.enterprise>
         <version.jakarta.inject>2.0.1</version.jakarta.inject>
         <version.jakarta.servlet>6.1.0</version.jakarta.servlet>
-        <version.jakarta.tck>11.0.1-SNAPSHOT</version.jakarta.tck>
+        <tck.version>11.0.1-SNAPSHOT</tck.version>
 
         <whitebox.directory>target/whiteboxes</whitebox.directory>
 
         <!-- Enable to run the tck-javatest protocol based tests by default -->
         <groups>tck-javatest</groups>
         <arquillian.xml.file>arquillian.xml</arquillian.xml.file>
+        <jakarta.tck.arquillian.version>11.0.8</jakarta.tck.arquillian.version>
+
 
     </properties>
 
@@ -85,7 +87,7 @@
             <dependency>
                 <groupId>jakarta.tck</groupId>
                 <artifactId>artifacts-bom</artifactId>
-                <version>${version.jakarta.tck}</version>
+                <version>${tck.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -143,27 +145,30 @@
         <dependency>
             <groupId>jakarta.tck</groupId>
             <artifactId>ejb30</artifactId>
-            <version>${version.jakarta.tck}</version>
+            <version>${tck.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.tck</groupId>
             <artifactId>ejb32</artifactId>
-            <version>${version.jakarta.tck}</version>
+            <version>${tck.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>jakarta.tck.arquillian</groupId>
             <artifactId>arquillian-protocol-appclient</artifactId>
+            <version>${jakarta.tck.arquillian.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.tck.arquillian</groupId>
             <artifactId>arquillian-protocol-javatest</artifactId>
+            <version>${jakarta.tck.arquillian.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.tck.arquillian</groupId>
             <artifactId>tck-porting-lib</artifactId>
+            <version>${jakarta.tck.arquillian.version}</version>
         </dependency>
 
         <!-- Junit5 -->
@@ -234,17 +239,18 @@
         <dependency>
             <groupId>jakarta.tck</groupId>
             <artifactId>whitebox</artifactId>
-            <version>${version.jakarta.tck}</version>
+            <version>${tck.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.tck</groupId>
             <artifactId>whitebox-tx</artifactId>
-            <version>${version.jakarta.tck}</version>
+            <version>${tck.version}</version>
             <type>rar</type>
         </dependency>
         <dependency>
             <groupId>jakarta.tck.arquillian</groupId>
             <artifactId>arquillian-protocol-lib</artifactId>
+            <version>${jakarta.tck.arquillian.version}</version>
         </dependency>
     </dependencies>
 
